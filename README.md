@@ -25,7 +25,10 @@ this. If not, it would also be a cool future project!
 
 Google's main endpoint for its search engine is [https://google.com/search](https://google.com/search)
 
-Google's Advanced Search page is [https://google.com/advanced_search](https://google.com/advanced_search)
+Google also has several advanced search pages which utilize different search providers, though they all are utility pages which are wrappers around the same ``/search`` endpoint.
+* [Advanced Search](https://google.com/advanced_search)
+* [Advanced Video Search](https://www.google.com/advanced_video_search)
+* [Advanced Image Search](https://www.google.com/advanced_image_search)
 
 In addition, Google has a programmable [Custom Search Engine (CSE)](https://developers.google.com/custom-search) that can be programmed from the [REST API](https://developers.google.com/custom-search/v1) as well as a [Web Dev API](https://developers.google.com/custom-search/docs/tutorial/implementingsearchbox) which is helpful to reference for clarification on more obscure query parameters.
 
@@ -37,6 +40,7 @@ GET https://google.com/search?q=cute+dogs&as_qdr=d
 
 ## Query parameters
 
+* 
 * as_q -> Alias to ``q``, Main Query
 * as_epq -> Return results for exact word/phrase
 * as_oq -> Return results which contain any of the words 
@@ -56,16 +60,39 @@ GET https://google.com/search?q=cute+dogs&as_qdr=d
 * as_filetype -> Return results with this file extension or filetype
   - Does not include ``.``
   - Unknown whether the actual type of file or just its extension is considered
-* tbs -> Extra parameters, usually related to licensing
+* imgsz -> Return images with this size
+  - l -> Large
+* imgar -> Return images with this aspect ratio
+  - t -> Tall
+* imgc -> Return images matching this color scheme
+  - gray -> Monochrome
+* imgcolor -> Return images matching this color
+  - red -> Red
+* imgtype -> Return images of this type
+  - face -> Face pictures
+* tbs -> Comma-separated extra parameters
   - sur:f -> Free to use and share not including commercially
   - sur:fm -> Free to use, share, and modify not including commercially
   - sur:fc -> Free to use and share including commercially
   - sur:fmc -> Free to use, share, and modify including commercially
+  - sur:cl -> Creative Commons License
+  - sur:ol -> Commercial & Other Licenses
+  - dur:s -> Return only videos with a short duration (0-4 minutes)
+  - dur:m -> Return only videos with a medium duration (4-20 minutes)
+  - dur:l -> Return only videos with a long duration (20+ minutes)
+  - hq:h -> Return only videos in HD
+  - cc:1 -> Return only videos with closed captioning
 * tbm -> User-friendly name for service provider
   - isch -> Google Images
+  - vid -> Google Videos
+  - nws -> Google News
+  - bks -> Google Books
+  - flm -> Google Flights
 * udm -> Not user-friendly ID for service provider
   - 2 -> Google Images
   - 14 -> Google Web
+  - 18 -> Google Forums
+  - 28 -> Google Shopping
 * q -> Main Query (Series of operations)
   - ``WORD`` -> Return results containing ``WORD``
   - -``OP`` -> Return only results where ``OP`` is false
@@ -124,7 +151,9 @@ GET https://www.bing.com/search?q=Hell+is+a+place+on+earth&count=2
 # Sources
 
 * [Google Search](https://www.google.com/search)
-  - [Google Advanced Search](https://www.google.com/advanced_search)
+  - [Advanced Search](https://www.google.com/advanced_search)
+  - [Advanced Video Search](https://www.google.com/advanced_video_search)
+  - [Advanced Image Search](https://www.google.com/advanced_image_search)
   - [Google REST API](https://developers.google.com/custom-search/v1)
   - [Google Custom Search Overview](https://developers.google.com/custom-search/docs/overview)
 * [Google Developers Custom Programmable Search Engine](https://developers.google.com/custom-search)
@@ -133,7 +162,9 @@ GET https://www.bing.com/search?q=Hell+is+a+place+on+earth&count=2
 * [Ahref's Blog Post on Advanced Google Search Operators](https://ahrefs.com/blog/google-advanced-search-operators/)
 * [Bing Search](https://www.bing.com/search)
   - [Bing Web Search API](https://learn.microsoft.com/en-us/bing/search-apis/bing-web-search/reference/endpoints)
-* [SEOsly's Tutorial on Bing Search Operators](https://seosly.com/blog/bing-search-operators/)
+* [SEOsly](https://seosly.com/)
+  - [Bing Search Operators](https://seosly.com/blog/bing-search-operators/)
+  - [Google Search Operators](https://seosly.com/blog/google-search-operators/)
 * [Bing Advanced Search Operations](https://support.microsoft.com/en-us/topic/advanced-search-options-b92e25f1-0085-4271-bdf9-14aaea720930)
 * [Bing Advanced Seach Keywords](https://support.microsoft.com/en-us/topic/advanced-search-keywords-ea595928-5d63-4a0b-9c6b-0b769865e78a)
 * [Stack Overflow on Bing Query Parameters](https://webapps.stackexchange.com/questions/111235/what-query-parameters-does-bing-have)
