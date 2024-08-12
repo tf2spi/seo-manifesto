@@ -19,6 +19,11 @@ query parameters in a cross-engine way. I've, surprisingly, not seen any meta-se
 engine do this yet. It would be really cool if some of them already did
 this. If not, it would also be a cool future project!
 
+# General Resources
+
+* [SEOsly](https://seosly.com/)
+* [Google Developer's Search Docs](https://developers.google.com/search/docs)
+
 # Google
 
 ## Endpoints
@@ -148,8 +153,67 @@ GET https://www.bing.com/search?q=Hell+is+a+place+on+earth&count=2
     * Supposedly, should be actually based on file contents rather than extension. Haven't tested this.
   - ext:``EXT`` -> Return results with file extension ``EXT``
 
+# Robots Exclusion Protocol (robots.txt)
+
+The robots exclusions protocol is useful for excluding various URIs that innocent and well-programmed web crawlers
+should crawl. Note that web crawlers can craft any HTTP request to any URI that they want, so the protocol lays
+out only suggestions to web crawlers rather than enforcements.
+
+Web crawlers should read ``/robots.txt`` from the ``HTTP`` server and parse it according to the robots exclusion
+protocol. Including this file can optimize how bots index your page and can reduce automated visits that you intend
+to be used only by browsers.
+
+It's also useful to block certain bots. Again, someone can patch the bot anyways to have the same behavior
+but lie about its user agent, but it at least stops the original innocent bot from crawling your page, which
+would be a much larger ratio of traffic anyways.
+
+## Groups
+
+All ``robots.txt`` files are a series of user agent "groups".
+The first line of a group specifies the user agent, which can be
+a specific one (i.e. ``Googlebot``) or ``*``, which is a special
+character specifying all user agents.
+
+```
+# Specific user agent
+user-agent: Googlebot
+
+# All user agents
+user-agent: *
+```
+
+## Rules
+
+After the user agent for a group is specified, a series of "allow"
+or "disallow" rules are specified on their own lines.
+
+```
+disallow: /cgi-bin
+allow: /blog
+```
+
+The rules are terminated by specifying a line which isn't an
+``allow`` or ``disallow`` rule, or by ending the file.
+ 
+## Additional directives
+
+Bots can use additional directives to guide their searches.
+For instance, ``Sitemaps:`` is a common directive which specifies
+a [Sitemaps](https://www.sitemaps.org/index.html) file.
+
+```
+Sitemaps: https://example.org/sitemap.xml
+```
+
 # Sources
 
+* [Google Developer's Search Docs](https://developers.google.com/search/docs)
+  - [Sitemaps](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap)
+* [Sitemaps Specification](https://www.sitemaps.org/index.html)
+  - [Protocol](https://www.sitemaps.org/protocol.html)
+  - [FAQ](https://www.sitemaps.org/faq.html)
+* [RFC 9309 Robots Exclusion Protocol (robots.txt)](https://datatracker.ietf.org/doc/html/rfc9309)
+  - [robotstxt.org](http://www.robotstxt.org/about.html)
 * [Google Search](https://www.google.com/search)
   - [Advanced Search](https://www.google.com/advanced_search)
   - [Advanced Video Search](https://www.google.com/advanced_video_search)
