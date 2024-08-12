@@ -205,6 +205,80 @@ a [Sitemaps](https://www.sitemaps.org/index.html) file.
 Sitemaps: https://example.org/sitemap.xml
 ```
 
+# Sitemaps
+
+Sitemaps advise web crawlers on good URIs to visit. This is different from ``robots.txt``
+which specifies sites that a crawler is allowed to visit but not what it should visit.
+
+This is useful because endpoints that may be easy to access from the web browser that
+still have useful content for bots can be hard to visit by bots when they start from
+the root and crawl from there.
+
+One particularly cool detail about sitemaps is that URIs can include query strings as well,
+so some ``GET`` requests that require a form to be filled out can be included in the sitemap
+so that the bot is able to visit your page without filling out the form.
+
+## Schema
+
+There are a couple of different schemas, one for plain text (``sitemap.txt``) and
+one for XML (``sitemap.xml``).
+
+With ``sitemap.txt``, all URIs are listed on their own line.
+
+```
+https://www.example.com/
+https://www.example.com/dogs
+https://www.example.com/cats?i=2&j=3
+```
+
+With ``sitemap.xml``, URIs are specified in a ``urlset`` root.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	<url><loc>https://www.example.com/</loc></url>
+	<url><loc>https://www.example.com/dogs</loc></url>
+	<url><loc>https://www.example.com/cats?i=2&amp;j=3</loc></url>
+</urlset>
+```
+
+The core schema has other elements associated with ``<url>``, but [Google's Additional Notes about Sitemaps]
+(https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap#additional-notes-about-xml-sitemaps)
+states that Google ignores these elements or verifies them using other indicators.
+
+Any trailing slash on URIs before the query string are significant to some web servers,
+so they are also significant in the sitemaps. It is left out of the URI in the sitemap
+if the web server does not require a slash and put in if it is required.
+
+## Extensions
+
+Sitemaps can, interestingly enough, be extended depending on the crawler.
+For instance, sitemaps from [npr.org](https://www.npr.org) will sometimes
+be tailored to Google web crawlers and will contain the [Google Image Sitemap]
+(https://www.google.com/schemas/sitemap-image/1.1/) schema.
+
+```xml
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+	<!-- Rest of elements in here -->
+</urlset>
+```
+
+##
+
+# Google Search Central
+
+[Google Search Central](https://developers.google.com/search), formerly known
+as Google Webmasters, is a set of APIs and guides to directly improve the SEO
+of your site with google search. This sounds very niche and some of it is niche
+to improving your results with Google Search, but a lot of the advice is also
+good for generally optimizing across all search engines.
+
+I would like to go over this more in detail at a later point but I need to
+research and use it myself to give good advice on it. In any case, [SEOsly]
+(https://seosly.com/blog/how-to-audit-site-with-google-search-console/) has
+done a good job describing a lot of cool features you can do with GSC if
+you would like to look more into it.
+
 # Sources
 
 * [Google Developer's Search Docs](https://developers.google.com/search/docs)
